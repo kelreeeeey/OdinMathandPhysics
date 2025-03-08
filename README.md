@@ -18,6 +18,8 @@ self-explanatory itself.
 
 related to angles, sin cos and their frens
 
+more -> [md Docs](./md_docs/trigonometries.md)
+
 ### [utils](./mathandphysics/utils.odin)
 
 things i don't know where to put yet.

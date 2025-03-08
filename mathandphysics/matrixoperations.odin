@@ -2,7 +2,7 @@ package mathandphy
 
 import "base:intrinsics"
 
-outer_product_different :: proc(x: $T/[]$E, y: $TT/[]$S) -> [][]E
+outer_product :: proc(x: $T/[]$E, y: $TT/[]$S) -> [][]E
     where intrinsics.type_is_numeric(E), intrinsics.type_is_numeric(S) {
     result := make([][]E, len(x))
     for i in 0..<len(x) {
@@ -15,17 +15,14 @@ outer_product_different :: proc(x: $T/[]$E, y: $TT/[]$S) -> [][]E
 }
 
 
-outer_product_different_types_to_target :: proc($TT: typeid, x: []$T, y: []$S) -> [][]T
-where intrinsics.type_is_array(T) && intrinsics.type_is_array(S) {
-    result := make([][]TT, len(x))
+cast_outer_product :: proc($T: typeid, x: $TT/[]$E, y: $TTT/[]$S) -> [][]T
+where intrinsics.type_is_numeric(T), intrinsics.type_is_numeric(E), intrinsics.type_is_numeric(S) {
+    result := make([][]T, len(x))
     for i in 0..<len(x) {
-        result[i] = make([]TT, len(y))
+        result[i] = make([]T, len(y))
         for j in 0..<len(y) {
-            result[i][j] = TT( x[i] ) * TT( y[j] )  // Direct element-wise product
+            result[i][j] = T( x[i] ) * T( y[j] )  // Direct element-wise product
         }
     }
     return result
 }
-
-
-outer_product :: proc {outer_product_different, outer_product_different_types_to_target }
