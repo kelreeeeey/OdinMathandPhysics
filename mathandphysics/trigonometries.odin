@@ -1,6 +1,7 @@
 package mathandphy
 
 import "core:math"
+import "base:intrinsics"
 
 sinc :: proc(x: $T) -> T where intrinsics.type_is_numeric(T) {
     phi_x := math.PI * x
