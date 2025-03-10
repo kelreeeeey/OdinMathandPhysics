@@ -11,15 +11,65 @@ test_trig :: proc() {
 
     fmt.println("\nTest: Trigonometries and frens")
     x:f32 =46
-    xs := []f32{1, 2,10, 20, 8}
+    xs := []c.double{10, 20, 30, 50, 70}
     sinc_x := mp.sinc(x, c.double)
     sinc_xs := mp.sinc(xs, c.double)
     cosc_x := mp.cosc(x)
 
-    fmt.printfln("================\nsinc(%v)=%v", xs, sinc_xs)
+    for i in 0..<len(xs) {
+        fmt.printfln("sinc(xs[%v]=[%v])=[%v]",
+            i, xs[i], sinc_xs[i]) }
     fmt.printfln("================\nsinc(%v)=%v, cosc(%v)=%v",
         x, sinc_x,
         x, cosc_x)
+}
+
+test_utils :: proc() {
+    fmt.println("\nTest: Utils - Linear Spacing")
+
+    {
+        start, end : f64= 2.0, 3.0
+        n_smpl :int=5
+        lnsp, step, unexpected_behaviour := mp.linear_spacing(start, end, n_smpl)
+        if unexpected_behaviour == nil {
+            fmt.printfln("Linear spacing from [%v, %v] with %v samples:\n\t%v, with %v step ",
+            start, end, n_smpl, lnsp, step)  }
+    }
+
+    { // unexpected behaviour catched!, n_sample ideally should always be positive number!
+        start, end : f64= 2.0, 10.0
+        n_smpl :int=0
+        lnsp, step, unexpected_behaviour := mp.linear_spacing(start, end, n_smpl)
+        if unexpected_behaviour != nil {
+            fmt.printfln(
+                "Unexpected Consequence [%v] || Linear spacing from [%v, %v] with %v samples:\n\t%v, with %v step ",
+            unexpected_behaviour, start, end, n_smpl, lnsp, step)  }
+    }
+
+    {
+
+        start, end : f64= 2.0, 5
+        n_smpl :int=10
+        lnsp, step, unexpected_behaviour := mp.linear_spacing(start, end, n_smpl)
+        if unexpected_behaviour == nil
+        {
+            fmt.printfln("Linear spacing from [%v, %v] with %v samples:\n\t%v, with %v step ",
+                start, end, n_smpl, lnsp, step)
+        }
+    }
+
+    fmt.println("\nTest: Utils - Geometric Spacing")
+    { // geometrics 
+        start, end : f64= 1.0, 1000.0
+        n_smpl :int=4
+        lnsp, step, unexpected_behaviour := mp.geometric_spacing(start, end, n_smpl)
+        if unexpected_behaviour == nil {
+            fmt.printfln(
+                "Unexpected Consequence [%v] || Linear spacing from [%v, %v] with %v samples:\n\t%v, with %v step ",
+            unexpected_behaviour, start, end, n_smpl, lnsp, step)  }
+    }
+
+
 }
 
 test_matrixops :: proc() {
@@ -77,6 +127,7 @@ test_tensors :: proc() {
 main :: proc() {
     fmt.println("Math and Physics OdinLib")
     test_trig()
-    test_matrixops()
-    test_tensors()
+    test_utils()
+    //test_matrixops()
+    //test_tensors()
 }
