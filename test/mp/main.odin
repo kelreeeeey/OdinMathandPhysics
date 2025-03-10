@@ -4,7 +4,7 @@ package main_mathandphysics
 import "core:fmt"
 import "core:math"
 import "core:c"
-import mp "../mathandphysics"
+import mp "../../mathandphysics"
 
 
 test_trig :: proc() {
