@@ -3,17 +3,20 @@ package main_mathandphysics
 
 import "core:fmt"
 import "core:math"
+import "core:c"
 import mp "../mathandphysics"
 
 
 test_trig :: proc() {
 
     fmt.println("\nTest: Trigonometries and frens")
-    x:f32 =-90
-    sinc_x := mp.sinc(x, f64)
+    x:f32 =46
+    xs := []f32{1, 2,10, 20, 8}
+    sinc_x := mp.sinc(x, c.double)
+    sinc_xs := mp.sinc(xs, c.double)
     cosc_x := mp.cosc(x)
 
-    //fmt.printfln("================\nsinc(%v)=%v", x, sinc_x)
+    fmt.printfln("================\nsinc(%v)=%v", xs, sinc_xs)
     fmt.printfln("================\nsinc(%v)=%v, cosc(%v)=%v",
         x, sinc_x,
         x, cosc_x)
