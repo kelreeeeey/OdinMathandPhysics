@@ -40,7 +40,7 @@ prereq.: `GNUPlot`
 i'm currenlty using `gnuplot 6.0 patchlevel 2`
 if you wanna use the [mpplot(just got it's first push)](./mpplot) make sure you have gnuplot installed!
 
-## Some snippets i've been building so far (using GNUPlot)
+## Some snippets of what i've been building so far (using GNUPlot)
 
 * mimic `[numpy.linspace()](https://numpy.org/doc/2.1/reference/generated/numpy.linspace.html)` to make this
 
@@ -49,6 +49,7 @@ if you wanna use the [mpplot(just got it's first push)](./mpplot) make sure you 
 
 
 With Odin and GNUPlot
+
 ![sinc function](./md_docs/assets/test_odingnuplot.png)
 
 
@@ -58,5 +59,7 @@ also make sure your python has numpy and matplotlib installed. (here i'm using p
 ```
 py -3.10 -c "import numpy as np; import matplotlib.pyplot as plt; plt.plot(np.linspace(-21.2, 21.2, 2000), np.sinc(np.linspace(-21.2, 21.2, 2000))); plt.show()"
 ```
+
 With Python, numpy and Matplotlib
+
 ![sinc function with numpy and matplotlib](./md_docs/assets/test_odin_matplotlib.png)
