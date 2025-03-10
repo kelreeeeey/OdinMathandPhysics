@@ -80,13 +80,15 @@ geometric_spacing :: proc(
         return array, range, err
     }
 
-    steps := linalg.pow(f32(end)/ f32(start), 1.0/f32(samples-1))
+    // a^n = a_0 \times r^{n-1}
+    // factor = r = \( \frac{a^n}{a_0} \)^{1/n-1}
+    factor := linalg.pow(f32(end)/ f32(start), 1.0/f32(samples-1))
     array := make([]f32, samples+1)
     array[0] = f32(start)
     for i in 1..<len(array) {
-        array[i] = array[i-1]*steps
+        array[i] = array[i-1]*factor
     }
-    return array, steps, nil
+    return array, factor, nil
 }
 
 //NumberErrors :: enum {
