@@ -1,12 +1,14 @@
-# all:
-# 	odin build . -out:./bin/syndatagen.exe --debug
-
 all:
-	odin build ./test -out:./bin/test.exe --debug
+	odin build ./test/mp/ -out:./bin/test_mp.exe --debug
+	odin build ./test/mpplot/ -out:./bin/test_mpplot.exe --debug
 
 clean:
-	rm ./bin/test.exe
+	rm ./bin/*.exe
 	rm *.exe
 
-run_test:
-	./bin/test.exe
+test_mp:
+	./bin/test_mp.exe
+
+test_mpplot:
+	./bin/test_mpplot.exe 200 -0.001 20
+	./bin/test_mpplot.exe 200 -20 0.001
