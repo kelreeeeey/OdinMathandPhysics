@@ -42,24 +42,19 @@ if you wanna use the [mpplot(just got it's first push)](./mpplot) make sure you 
 
 ## Some snippets of what i've been building so far (using GNUPlot)
 
-* mimic `[numpy.linspace()](https://numpy.org/doc/2.1/reference/generated/numpy.linspace.html)` to make this
+### mimic `[numpy.linspace and numpy.sinc](https://numpy.org/doc/2.1/reference/generated/numpy.linspace.html)` to make this
 
-> to try it, just run `make` in the root of this repo.
-> if you don't have `make` installed, just run `odin build ./test/mpplot/plot_sinc_gnuplot.odin -file` and try callit!
-
-
-With Odin and GNUPlot
-
-![sinc function](./md_docs/assets/test_odingnuplot.png)
+to try the following, just run `make` in the root of this repo.
+if you don't have `make` installed, just run `odin build ./test/mpplot/plot_sinc_gnuplot.odin -file` and try callit!
 
 
-just to verify that, since i'm mimicing numpu, run this command on your terminal
-also make sure your python has numpy and matplotlib installed. (here i'm using py3.10)
+| OdinMathandPhysics-GNUPlot | Numpy-Matplotlib |
+| -------------- | --------------- |
+| ![sinc function](./md_docs/assets/test_odingnuplot.png) | ![sinc function with numpy and matplotlib](./md_docs/assets/test_odin_matplotlib.png) |
 
+
+_nb:just to verify that, since i'm mimicing numpu, run this command on your terminal
+also make sure your python has numpy and matplotlib installed. (here i'm using py3.10)_
 ```
 py -3.10 -c "import numpy as np; import matplotlib.pyplot as plt; plt.plot(np.linspace(-21.2, 21.2, 2000), np.sinc(np.linspace(-21.2, 21.2, 2000))); plt.show()"
 ```
-
-With Python, numpy and Matplotlib
-
-![sinc function with numpy and matplotlib](./md_docs/assets/test_odin_matplotlib.png)
