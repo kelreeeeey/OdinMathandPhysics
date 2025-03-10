@@ -69,6 +69,26 @@ test_utils :: proc() {
             unexpected_behaviour, start, end, n_smpl, lnsp, step)  }
     }
 
+    {
+        a := matrix[2, 3]f32{
+            2, 3, 1,
+            4, 5, 0,
+        }
+
+        b := matrix[3, 2]f32{
+            1, 2,
+            3, 4,
+            5, 6,
+        }
+
+        fmt.println("\n\n\na", a)
+        fmt.println("b", b)
+
+        c := a * b + 10
+        #assert(type_of(c) == matrix[2, 2]f32)
+        fmt.println("\n\n\nc = a * b", c)
+    }
+
 
 }
 
@@ -128,6 +148,8 @@ main :: proc() {
     fmt.println("Math and Physics OdinLib")
     test_trig()
     test_utils()
+    fmt.println("Math and Physics OdinLib")
+    //example_plot_sinc_gnuplot()
     //test_matrixops()
     //test_tensors()
 }
