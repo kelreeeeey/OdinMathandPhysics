@@ -42,9 +42,9 @@ if you wanna use the [mpplot(just got it's first push)](./mpplot) make sure you 
 
 ## Some snippets of what i've been building so far (using GNUPlot)
 
-### mimic `[numpy.linspace and numpy.sinc](https://numpy.org/doc/2.1/reference/generated/numpy.linspace.html)` to make this
+### mimic [`numpy.linspace and numpy.sinc`](https://numpy.org/doc/2.1/reference/generated/numpy.linspace.html)
 
-to try the following, just run `make` in the root of this repo.
+you can try the following yourself, just run `make` in the root of this repo.
 if you don't have `make` installed, just run `odin build ./test/mpplot/plot_sinc_gnuplot.odin -file` and try callit!
 
 
