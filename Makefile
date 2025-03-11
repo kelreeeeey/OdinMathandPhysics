@@ -10,5 +10,5 @@ test_mp:
 	./bin/test_mp.exe
 
 test_mpplot:
-	./bin/test_mpplot.exe 200 -0.001 20
-	./bin/test_mpplot.exe 200 -20 0.001
+	./bin/test_mpplot.exe 100 -10 10.1
+	# ./bin/test_mpplot.exe 200 -20 0.001

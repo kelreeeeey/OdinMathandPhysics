@@ -126,6 +126,12 @@ test_matrixops :: proc() {
     fmt.printfln("OutProd x64-yInt-casted to f32(%v)= %v",
         typeid_of(type_of(x64yInt_tof32)), x64yInt_tof32)
 
+    for i in 0..<len(x64) {
+        for j in 0..<len(y64) {
+            fmt.println(i, j, xy64[i][j])
+        }
+    }
+
 }
 
 test_tensors :: proc() {
@@ -149,7 +155,6 @@ main :: proc() {
     test_trig()
     test_utils()
     fmt.println("Math and Physics OdinLib")
-    //example_plot_sinc_gnuplot()
-    //test_matrixops()
+    test_matrixops()
     //test_tensors()
 }

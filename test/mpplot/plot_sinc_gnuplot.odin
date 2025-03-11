@@ -3,6 +3,8 @@ package example_mpplot
 import "core:strconv"
 import "core:fmt"
 import "core:os"
+import "core:mem"
+import "core:strings"
 import mp "../../mathandphysics"
 import mpplt "../../mpplot"
 
@@ -14,7 +16,6 @@ example_plot_sinc_gnuplot :: proc()
 
     // generate normalized sin wave and it's corresponding x points
     args := os.args
-    fmt.println(args)
     if len(args) < 3 {
         fmt.println("hi!.")
         fmt.println("Lil Bro, you need [3](THREE) args for this chad to run!")
@@ -50,22 +51,35 @@ example_plot_sinc_gnuplot :: proc()
             "Created %v data X points from %v to %v",
             n_sample, start, end)
     }
+
     y_points := mp.sinc(x_points)
     defer delete(y_points)
 
+    array2d := mp.outer_product(x_points, x_points)
+    defer delete(array2d)
 
     // Filename and gnuplot argument generator
     file_name : string
+    file_name_2 : string
+    //err_upper : mem.Allocator_Error
     if len(args) > 4 {
         file_name = args[4]
+        //file_name_2, err_upper = strings.to_upper(file_name[:])
     } else {
         file_name = "./data_plot2d.dat"
+        file_name_2 = "./another_data.dat"
     }
 
-    mpplt.dump_gnuplot_file(x_points, y_points, file_name)
+    defer delete(file_name)
+    defer delete(file_name_2)
 
-    gnup_args := mpplt.make_gnuplot_args(file_name)
+    mpplt.dump_gnuplot_file(x_points, y_points, file_name)
+    gnup_args := mpplt.make_gnuplot_args(file_name, "' w l linewidth 1\n")
     mpplt.plot(gnup_args)
+
+    mpplt.dump_gnuplot_file(array2d, file_name_2)
+    gnup_args_2 := mpplt.make_gnuplot_args(file_name_2, "' matrix with image pixels\n")
+    mpplt.imshow(gnup_args_2)
 
 }
 
