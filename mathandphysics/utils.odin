@@ -1,6 +1,7 @@
 package mathandphy
 
 import "core:math/linalg"
+import "core:slice"
 import "base:intrinsics"
 
 convert_slice_vanilla :: proc($T: typeid, s: []$S) -> []T {
@@ -20,6 +21,17 @@ convert_slice_with_addition :: proc($T: typeid, s: []$S, scalar: T) -> []T {
 }
 
 convert_slice :: proc { convert_slice_vanilla, convert_slice_with_addition }
+
+//where_comp_1d_array_vanilla :: proc(s: $T/[]$S, $NUM: typeid) -> []bool
+//where intrinsics.type_is_numeric(S),
+//      intrinsics.type_is_numeric(NUM) {
+//          len_input := len(s)
+//          out_mask := make([]bool, len_input)
+//          for i in 0..<len_input {
+//              if s[i]
+//          }
+//
+//      }
 
 NumberSets :: enum {
    ExpectZeroOnly,
@@ -90,6 +102,35 @@ geometric_spacing :: proc(
     }
     return array, factor, nil
 }
+
+
+diagonal_NN_array :: proc(a: $T/[][]$E) -> []E
+where intrinsics.type_is_numeric(E) {
+
+
+    len_a := len(a)
+    len_a0 := len(a[0])
+
+    // TODO: ASSURE A IS NxN array
+    if len_a != len_a0 {
+        panic("a is not an n*n array")
+    }
+
+    out := make([]E, len_a0)
+
+    for i in 0..<len_a {
+        for j in 0..<len_a0 {
+            if i == j {
+                out[i] = a[i][j]
+            }
+        }
+    }
+
+    return out
+
+}
+
+diagonal :: proc { diagonal_NN_array }
 
 //NumberErrors :: enum {
 //    ZeroError,

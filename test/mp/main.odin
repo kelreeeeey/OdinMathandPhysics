@@ -3,6 +3,7 @@ package main_mathandphysics
 
 import "core:fmt"
 import "core:math"
+import "core:slice"
 import "core:c"
 import mp "../../mathandphysics"
 
@@ -134,6 +135,87 @@ test_matrixops :: proc() {
 
 }
 
+test_gauss_elimination :: proc() {
+    n : int = 3
+
+    a := make([][]f64, n)
+    defer delete(a)
+    A := make([][]f64, n)
+    defer delete(A)
+
+    b := make([]f64, n)
+    defer delete(b)
+    B := make([]f64, n)
+    defer delete(B)
+
+    for i in 0..<n {
+        temp := make([]f64, n)
+        temp2 := make([]f64, n)
+        a[i] = temp
+        A[i] = temp2
+    }
+
+    // initialization of `a`
+    a[0][0] =  1.0; a[0][1] =  2.0; a[0][2] =  1.0;
+    a[1][0] =  1.0; a[1][1] =  0.0; a[1][2] = -4.0;
+    a[2][0] = -1.0; a[2][1] =  5.0; a[2][2] =  0.0;
+
+    // initialization of `A`
+    A[0][0] =  1.0; A[0][1] =  2.0; A[0][2] =  2.0;
+    A[1][0] =  1.0; A[1][1] =  0.0; A[1][2] = -4.0;
+    A[2][0] = -1.0; A[2][1] =  5.0; A[2][2] =  0.0;
+
+    // initializatioon of `b`
+    b[0] = 0.0; b[1] = 6.0; b[2] = 4.0;
+
+    // initializatioon of `b`
+    B[0] = 0.0; B[1] = 6.0; B[2] = 4.0;
+
+
+    fmt.println("The Problem\n")
+    fmt.printfln("b[:]=%f\n", b);
+
+    for i := 0; i < n; i+=1
+    {
+        fmt.printfln(
+            "a[%d,0  %d,1  %d,2] = [%f  %f  %f]",
+            i, i, i, a[i][0], a[i][1], a[i][2]);
+    }
+
+    fmt.println("\nShut up, doin the gauss elimination...\n")
+    mp.gauss_elimintaion(a, b, n)
+
+    dig_a := mp.diagonal(a)
+    defer delete(dig_a)
+
+    fmt.println("\nOkay, here's the result, my king!\n")
+    fmt.printfln("GaussResult -> b[:]=%f\n", b);
+
+    fmt.printfln("diagonal a=%v\n", dig_a);
+    fmt.printfln("product of diagonal a=%v\n", mp.prod(dig_a));
+
+    for i := 0; i < n; i+=1
+    {
+        fmt.printfln(
+            "a[%d,0  %d,1  %d,2] = [%f  %f  %f]",
+            i, i, i, a[i][0], a[i][1], a[i][2]);
+    }
+
+    c := make([]f64, n)
+    defer delete(c)
+    c[0] = 1; c[1] = 1; c[2] = 1
+
+    prodA_b := mp.dot(A, b)
+    defer delete(prodA_b)
+    fmt.printfln("prod. of A.b = %v\n", prodA_b);
+
+    prodA_b_minusB := make([]f64, len(B))
+    defer delete(prodA_b_minusB)
+    for i in 0..<len(B) { prodA_b_minusB[i] = prodA_b[i] - B[i] }
+    fmt.printfln("( prod. of A.b ) - B = %v\n", prodA_b_minusB);
+
+}
+
 test_tensors :: proc() {
 
     fmt.println("\nTest: Tensor")
@@ -151,10 +233,11 @@ test_tensors :: proc() {
 }
 
 main :: proc() {
-    fmt.println("Math and Physics OdinLib")
-    test_trig()
-    test_utils()
-    fmt.println("Math and Physics OdinLib")
-    test_matrixops()
+    //fmt.println("Math and Physics OdinLib")
+    //test_trig()
+    //test_utils()
+    //fmt.println("Math and Physics OdinLib")
+    //test_matrixops()
+    test_gauss_elimination()
     //test_tensors()
 }
