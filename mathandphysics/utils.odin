@@ -1,5 +1,6 @@
 package mathandphy
 
+import "core:math"
 import "core:math/linalg"
 import "core:slice"
 import "base:intrinsics"
@@ -43,6 +44,28 @@ NumberSets :: enum {
    ExpectPositiveOnly,
    ExpectIntegerOnly,
    ExpectFloatOnly
+}
+
+get_max :: proc(array: $T/[]$D ) -> D where intrinsics.type_is_numeric(D) {
+    max_ : f64
+    max_ = -math.MAX_F64_PRECISION
+    for it in array {
+        if it <= max_ do continue
+        if math.is_nan(it) do continue
+        max_ = it
+    }
+    return cast(D)max_
+}
+
+get_min :: proc(array: $T/[]$D ) -> D where intrinsics.type_is_numeric(D) {
+    min_ : f64
+    min_ = math.MAX_F64_PRECISION
+    for it in array {
+        if it >= min_ do continue
+        if math.is_nan(it) do continue
+        min_ = it
+    }
+    return cast(D)min_
 }
 
 linear_spacing :: proc(
