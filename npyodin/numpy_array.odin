@@ -273,7 +273,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -288,7 +287,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -303,7 +301,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -318,7 +315,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -336,7 +332,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -354,7 +349,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -372,7 +366,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -390,7 +383,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -408,7 +400,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -426,7 +417,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -444,7 +434,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
@@ -467,17 +456,11 @@ recreate_array :: proc(
             ndarray.size = size
 
             count_elems := 0
-            //fmt.printfln("size: %v, length: %v", size, n_data_from_shape)
             if header.header.endianess == .Little {
                 _lines := make([dynamic]f64)
                 i : int
                 for i := 0; i <n_elem-(size/2); i += size {
                     casted_data, cast_ok := endian.get_f64(data[i:i+size], header.header.endianess)
-                    //fmt.printfln(
-                    //    "count: %v,%v | data: %v | c16: %v",
-                    //    count_elems, i,
-                    //    intrinsics.unaligned_load( (^u64)(raw_data(data[i:i+size]))),
-                    //    casted_data, )
                     count_elems += 1
                     append(&_lines, cast(f64)casted_data)
                 }
@@ -487,11 +470,6 @@ recreate_array :: proc(
                 i : int
                 for i := 0; i <n_elem-(size/2); i += size {
                     casted_data, cast_ok := endian.get_f64(data[i:i+size], header.header.endianess)
-                    //fmt.printfln(
-                    //    "count: %v,%v | data: %v | c16: %v",
-                    //    count_elems, i,
-                    //    data[i:i+size],
-                    //    casted_data, )
                     count_elems += 1
                     append(&_lines, cast(f64)casted_data)
                 }
@@ -505,8 +483,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
-            //ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 
             _lines := make([dynamic]f32)
@@ -523,7 +499,6 @@ recreate_array :: proc(
                 n_data_from_shape *= shp
             }
             size := len(data)/n_data_from_shape
-            //fmt.printfln("len(data): %v | n_data_from_shape: %v", len(data), n_data_from_shape)
             ndarray.length = cast(u64)n_data_from_shape
             ndarray.size = size
 

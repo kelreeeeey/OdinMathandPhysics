@@ -1,14 +1,17 @@
 package mathandphy
 
 import "base:intrinsics"
+import "core:fmt"
 
 outer_product :: proc(x: $T/[]$E, y: $TT/[]$S) -> [][]E
     where intrinsics.type_is_numeric(E), intrinsics.type_is_numeric(S) {
     result := make([][]E, len(x))
-    for i in 0..<len(x) {
+    fmt.printfln("x: %v, y: %v, results: %v", len(x), len(x), len(result))
+    for i in 0..<(len(x)-1) {
         result[i] = make([]E, len(y))
-        for j in 0..<len(y) {
-            result[i][j] = x[j] * E( y[i] )  // Direct element-wise product
+        for j in 0..<(len(y)-1) {
+            // fmt.printfln("[i-j] [%v-%v]", i, j)
+            result[i][j] = x[i] * E( y[j] )  // Direct element-wise product
         }
     }
     return result
@@ -37,26 +40,6 @@ prod_2D :: proc(x: $T/[][]$E) -> E
     }
     return prod
 }
-
-//prod_2D_axis :: proc(x: $T/[][]$E, axis: int) -> []E
-//    where intrinsics.type_is_numeric(E)
-//{
-//    prod : []E
-//    len_x := len(x)
-//    len_x0 := len(x[0])
-//    if axis == 0 { prod = make([]E, len_x)}
-//    if axis == 1 { prod = make([]E, len_x0)}
-//    for i in 0..<len_x {
-//        for j in 0..<len_x0 {
-//            if axis == 0 {
-//                prod[i] =
-//            }
-//            prod = x[i][j]
-//        }
-//    }
-//    return prod
-//}
-
 
 prod :: proc { prod_1D, prod_2D }
 
@@ -104,3 +87,24 @@ where intrinsics.type_is_numeric(T), intrinsics.type_is_numeric(E), intrinsics.t
     }
     return result
 }
+
+//prod_2D_axis :: proc(x: $T/[][]$E, axis: int) -> []E
+//    where intrinsics.type_is_numeric(E)
+//{
+//    prod : []E
+//    len_x := len(x)
+//    len_x0 := len(x[0])
+//    if axis == 0 { prod = make([]E, len_x)}
+//    if axis == 1 { prod = make([]E, len_x0)}
+//    for i in 0..<len_x {
+//        for j in 0..<len_x0 {
+//            if axis == 0 {
+//                prod[i] =
+//            }
+//            prod = x[i][j]
+//        }
+//    }
+//    return prod
+//}
+
+
